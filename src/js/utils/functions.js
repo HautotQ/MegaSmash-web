@@ -1,6 +1,11 @@
-export function navigationButton(root, label, ViewClass, ...args) {
+export function navigationButton(root, title, ViewClass) {
     const btn = document.createElement("button");
-    btn.innerText = label;
-    btn.onclick = () => new ViewClass(root, ...args);
+    btn.innerText = title;
+
+    btn.addEventListener("click", () => {
+        root.innerHTML = "";          // nettoie l’écran
+        new ViewClass(root);          // charge la nouvelle vue
+    });
+
     return btn;
 }
