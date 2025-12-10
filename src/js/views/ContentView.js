@@ -1,4 +1,4 @@
-import 
+import Main from ".../Main.js";
 
 export default class ContentView {
   constructor(root) {
