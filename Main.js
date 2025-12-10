@@ -1,4 +1,5 @@
 import ContentView from "./src/js/views/ContentView.js";
+import { navigationButton } from "./src/js/utils/functions.js";
 
 class Main {
     constructor(root) {
@@ -7,7 +8,7 @@ class Main {
         h1.innerText = "Texte Main.js";
         this.root.appendChild(h1);
         
-        //new ContentView();
+        
     }
 }
 
