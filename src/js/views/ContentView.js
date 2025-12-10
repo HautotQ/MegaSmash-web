@@ -1,4 +1,4 @@
-import Main from ".../Main.js";
+import Main from "../../Main.js";          // corrige le chemin
 import { navigationButton } from "../utils/functions.js";
 
 export default class ContentView {
@@ -14,5 +14,7 @@ export default class ContentView {
       "Retour",
       Main
     );
+
+    this.root.appendChild(backBtn);        // <-- tu avais oublié ça
   }
 }
