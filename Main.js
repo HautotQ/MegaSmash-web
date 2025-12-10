@@ -9,7 +9,7 @@ export default class Main {
         this.root.appendChild(h1);
 
         const testBtn = navigationButton(
-            root,
+            this.root,
             "Test",
             ContentView
         );
