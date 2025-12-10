@@ -1,4 +1,5 @@
 import Main from ".../Main.js";
+import { navigationButton } from "../utils/functions.js";
 
 export default class ContentView {
   constructor(root) {
