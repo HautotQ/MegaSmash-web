@@ -1,4 +1,4 @@
-import Main from "../../Main.js";          // corrige le chemin
+import Main from "../../../Main.js";
 import { navigationButton } from "../utils/functions.js";
 
 export default class ContentView {
