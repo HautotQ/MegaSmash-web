@@ -8,7 +8,13 @@ class Main {
         h1.innerText = "Texte Main.js";
         this.root.appendChild(h1);
         
-        
+        this.root.appendChild(
+            navigationButton(
+                root,
+                "Test",
+                ContentView
+            )
+        );
     }
 }
 
