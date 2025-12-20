@@ -1,14 +1,88 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="style.css">
-    <title>MegaSmash</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    
-    <script type="module" src="./Main.js"></script>
-  </body>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Jeu JS – Manette</title>
+<style>
+    body {
+        margin: 0;
+        background: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    canvas {
+        background: #7ec0ee;
+        image-rendering: pixelated;
+    }
+</style>
+</head>
+<body>
+
+<canvas id="game" width="320" height="240"></canvas>
+
+<script>
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+const sprite = new Image();
+sprite.src = "https://i.imgur.com/6X12Q7F.png"; // 32x32
+
+const player = {
+    x: 144,
+    y: 104,
+    size: 32,
+    speed: 2
+};
+
+let gamepadIndex = null;
+
+// Détection manette
+window.addEventListener("gamepadconnected", (e) => {
+    gamepadIndex = e.gamepad.index;
+    console.log("Manette connectée");
+});
+
+window.addEventListener("gamepaddisconnected", () => {
+    gamepadIndex = null;
+    console.log("Manette déconnectée");
+});
+
+function update() {
+    if (gamepadIndex !== null) {
+        const gp = navigator.getGamepads()[gamepadIndex];
+        if (gp) {
+            const xAxis = gp.axes[0]; // stick gauche X
+            const yAxis = gp.axes[1]; // stick gauche Y
+
+            // Zone morte
+            if (Math.abs(xAxis) > 0.15)
+                player.x += xAxis * player.speed;
+
+            if (Math.abs(yAxis) > 0.15)
+                player.y += yAxis * player.speed;
+        }
+    }
+
+    // Limites écran
+    player.x = Math.max(0, Math.min(canvas.width - player.size, player.x));
+    player.y = Math.max(0, Math.min(canvas.height - player.size, player.y));
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(sprite, player.x, player.y, player.size, player.size);
+}
+
+function loop() {
+    update();
+    draw();
+    requestAnimationFrame(loop);
+}
+
+sprite.onload = loop;
+</script>
+
+</body>
 </html>
